@@ -1,0 +1,71 @@
+<div>
+    <app-userheader></app-userheader>
+</div>
+<div style="background-color: #ffccff;margin-top: -30px;">
+    <br/><br/>
+    <div class="container" *ngIf="favs.length>0">
+        <div class="row text-center">
+            <div *ngFor="let recipe of recipes">
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-6" *ngIf="favs.indexOf(recipe.recipeId)>=0">
+                    <div class="card" style="width:250px;">
+                        <img class="card-img" style="width:250px;height: 225px;"
+                            src="http://localhost:8085/RESTAPI2018/image/{{recipe.imageName}}">
+                        <div class="card-body">
+                            <h3 class="card-title">{{recipe.title}}</h3>
+                            <h5>Category:{{recipe.category}}</h5>
+                            <p class="card-text">
+                                {{ (recipe.description.length>30)? (recipe.description | slice:0:30)+' ... ':(recipe.description)}}
+                            </p>
+                            <table>
+                                <tr>
+                                    <td><button class="btn" style="background-color: #AE388B;"
+                                            (click)="fullRecipe(recipe)">View full Recipe>></button></td>
+                                    <td colspan="5">&nbsp;</td>
+                                    <td><button style="border: none;" title="Delete from favourites"
+                                            (click)="deleteFav(recipe)"><i style="font-size: 18px;"
+                                                class="fa fa-trash"></i></button></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br/><br/><br/><br/>
+    </div>
+</div>
+<div style="background-color: #ffccff;margin-top: -30px;">
+    <div *ngIf="favs.length===0" style="height: 575px;">
+        <br/><br/><br/><br/>
+        <i class="fa fa-frown-o" style="font-size: 150px;margin-left: 45%;color: #AE388B;" aria-hidden="true"></i><br />
+        <h3 class="text-center" style="color: #AE388B;">No favourites!</h3><br />
+        <button class="btn text-center" style="margin-left: 45%;background-color: #AE388B;color: white;" (click)="viewRecipes()">View
+            Recipes&nbsp;&nbsp;<i style="color: white;" class="fa fa-cutlery" aria-hidden="true"></i></button>
+
+    </div>
+</div>
+<!--div *ngIf="recipe" class="container">
+    <img style="height:250px;float: left;margin-right: 100px;" src="assets\Images\recipe.jpg">
+    <br />
+    <h1>{{recipe.title}}</h1>
+    <br />
+    <h5>Category:{{recipe.category}}</h5>
+    <h3>{{recipe.description}}</h3>
+    <h5>Cook Time:{{recipe.cookTime}}</h5>
+    <h5>Persons:{{recipe.persons}}</h5>
+    <br />
+    <h4>Ingredients:</h4>
+    <div *ngFor="let ing of ings">
+        <ul>
+            <li>{{ing}}</li>
+        </ul>
+    </div>
+    <h4>Procedure:</h4>
+    <div *ngFor="let step of steps">
+        <ul>
+            <li>{{step}}</li>
+        </ul>
+    </div>
+    <h5>Tips:</h5>
+    <p>{{recipe.tips}}</p>
+</div-->

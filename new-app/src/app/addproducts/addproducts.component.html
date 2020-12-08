@@ -1,0 +1,62 @@
+<html>
+
+<head>
+    <title>Add recipe</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+        integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="addproducts.component.css">
+</head>
+
+<body>
+    <app-productsheader></app-productsheader>
+    <div class="mainsec">
+
+        <div class="centered">
+            <h1><b>Add Product</b></h1>
+        </div>
+        <div class="row r1">
+            <div class="col-md-4 r1c1"><img src='/assets/Images/product1.png' class="img"></div>
+            <div class="col-md-6 r1c2">
+                <form #addProd="ngForm" (ngSubmit)="add(addProd.value)">
+                    <h4 class="heading">ProductName</h4>
+                    <input type="text" placeholder="Enter productName" class="name" name="productName" [(ngModel)]='product.produtName'><br><br>
+                    <h4 class="heading">Description</h4> <textarea cols="50" rows="3" placeholder="add description"
+                        class="textarea" name="description" [(ngModel)]='product.description'></textarea><br><br>
+                    <h4 class="heading">Quantity</h4> <input type="number" class="name"
+                        placeholder="enter quantity" name="quantity" [(ngModel)]='product.quantity'><br><br>
+                    <h4 class="heading">Price</h4> <input type="number" class="name" placeholder="enter price" name="price" [(ngModel)]='product.price'><br><br>
+                    <h4 class="heading">Manufacturer</h4> <input type="text" class="name"
+                        placeholder="enter manufacturer" name="manufacturer" [(ngModel)]='product.manufacturer'><br><br>
+                        <div>
+                            <img [src]="imageUrl" style="width:200px;height:200px;margin-left: 10px;margin-right: 10px;" alt="Your Uploaded Product Image">
+                            <input type="file" style="margin-top:150px; float:right;" #Image accept="image/*" (change)="handleFileInput($event.target.files)">
+                        </div>
+                    <button class="button">Add</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<!--div class="container">
+    <fieldset>
+        <legend>Add</legend>
+        <form #addProd="ngForm" (ngSubmit)="add(addProd.value)">
+            Product Name <input type="text" name="productName" [(ngModel)]='product.produtName'><br /><br />
+            Description <textarea rows="4" cols="30" name="description"
+                [(ngModel)]='product.description'></textarea><br /><br />
+            Quantity <input type="number" name="quantity" [(ngModel)]='product.quantity'><br /><br />
+            Price <input type="number" name="price" [(ngModel)]='product.price'><br /><br />
+            Manufacturer <input type="text" name="manufacturer" [(ngModel)]='product.manufacturer'><br /><br />
+            <div>
+                <img [src]="imageUrl" style="width:200px;height:200px;margin-left: 10px;margin-right: 10px;" alt="Your Uploaded Product Image">
+                <input type="file" style="margin-top:150px; float:right;" #Image accept="image/*" (change)="handleFileInput($event.target.files)">
+            </div>
+            <button>Add</button>
+        </form>
+    </fieldset>
+</div-->

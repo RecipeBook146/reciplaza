@@ -1,0 +1,83 @@
+<body>
+    <nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #AE388B;">
+        <img src="assets\Images\logo.png" style="margin-left: 30px;">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" (click)="allRecipe()"><i style="font-size: 23px;margin-left: 650px;margin-top: -20px;" class="fa fa-home"
+                        aria-hidden="true"></i></a>
+            </li>&nbsp;&nbsp;
+            <li class="nav-item">
+                <button class="dropbtn btn" style="background-color: #AE388B;color: white;" (click)="addRecipe()">Add Recipe</button>
+            </li>&nbsp;&nbsp;
+
+            <li class="nav-item">
+                <button class="dropbtn btn" style="background-color: #AE388B;color: white;" (click)="viewProducts()" >View
+                    Products</button>
+            </li>&nbsp;&nbsp;
+            <li class="nav-item">
+                <button class="dropbtn btn" style="background-color: #AE388B;color: white;" (click)="viewcart()"><i style="font-size: 18px;"
+                    class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;&nbsp;( {{temp.length+len}} )</button>
+            </li>
+            <li class="nav-item dropdown">
+                <div class="dropdown">
+                    <button class="dropbtn btn" style="background-color: #AE388B;color: white;"> {{loginId}}&nbsp;&nbsp;<i style="font-size: 11px;"
+                            class="fa fa-chevron-down" aria-hidden="true"></i></button>
+                    <div class="dropdown-content">
+                        <a (click)="getfav()">My Favourites</a>
+                        <a (click)="getmyrecipes()">My Recipes</a>
+                        <a (click)="getmyorders()">My orders</a>
+                        <a (click)="getRqsts()">My Requests</a>
+                    </div>
+                </div>
+            </li>&nbsp;&nbsp;
+            <!--li class="nav-item dropdown">
+                <div class="dropdown">
+                    <button class="dropbtn btn btn-dark">Cart&nbsp;&nbsp;<i style="font-size: 11px;"
+                            class="fa fa-shopping-cart" aria-hidden="true"></i></button>
+                    <div class="dropdown-content" *ngFor="let product of products">
+                        <div class="card" >
+                            <img class="card-img" style="height:100px;width: 100px;"
+                                src="http://localhost:8085/RESTAPI2018/image/{{product.imageName}}">
+                            <div class="card-body" style="float: left;">
+                                <h5 class="card-title">{{product.manufacturer}} {{product.produtName}}</h5>
+                                <p class="card-text">{{product.description}}</p>
+                                <h5>{{product.price | currency:'INR'}}</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li-->
+            
+            <li class="nav-item">
+                <button class="dropbtn btn" style="background-color: #AE388B;color: white;" (click)="logout()" >Log Out</button>
+            </li>
+        </ul>
+    </nav>
+    <br>
+</body>
+
+
+<!--img style="float: left;height: 40px;width: 4px;"
+                                src="http://localhost:8085/RESTAPI2018/image/{{product.imageName}}">
+                            <h5 style="float: left;">{{product.productName}}</h5-->
+
+
+<!--head>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-sm bg-light">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" (click)="allRecipe()"><i class="fa fa-home" aria-hidden="true"></i></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" (click)="addRecipe()">Add Recipe</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" (click)="logout()">Log Out</a>
+            </li>
+        </ul>
+    </nav>
+</body-->

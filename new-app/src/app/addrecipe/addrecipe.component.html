@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Add recipe</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+        integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="addrecipe.component.css">
+</head>
+
+<body>
+    <div>
+        <app-userheader></app-userheader>
+    </div>
+    <div class="mainsec">
+        <div class="centered"><b>Add Recipe&nbsp;<i class="fa fa-cutlery" style="color:rgb(255, 39, 104);"
+            aria-hidden="true"></i></b></div>
+        <div class="modal fade" id="cookModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Enter amount for persons:</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form #cookForm="ngForm" class="form-group" (ngSubmit)="demo()">
+                            Enter Price:<input type="number" name="price" [(ngModel)]="recipe.price" /><br />
+                            Enter Persons:<input type="number" name="np" [(ngModel)]="recipe.np" /><br />
+                            Will you bring all Ingredients with you?
+                            <input type="radio" value="yes" name="conf" [(ngModel)]="recipe.conf">yes
+                            <input type="radio" value="no" name="conf" [(ngModel)]="recipe.conf">no<br />
+                            <button class="btn btn-primary">Update</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-danger" (click)="Cancel()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="box">
+
+
+            <form [formGroup]="demoForm">
+                <br />
+                <h3 class="heading">Title</h3>
+                <input type="text" formControlName="title" class="title"><br /><br />
+                <h3 class="heading">Category</h3>
+                <select formControlName="category" class="type">
+                    <option value="Starter">Starter</option>
+                    <option value="Main Course">Main Course</option>
+                    <option value="Dessert">Dessert</option>
+                    <option value="Beverage">Beverge</option>
+                    <option value="Other">Other</option>
+                </select><br><br>
+                <h3 class="heading">Cooking Time </h3>
+                <input type="text" formControlName="cookTime" class="type"><br /><br />
+                <h3 class="heading">Persons</h3>
+                <input type="text" formControlName="persons" class="type"><br /><br />
+                <h3 class="heading">Description</h3>
+                <textarea rows="4" cols="50" formControlName="description"
+                    placeholder="Add Description about your Recipe"></textarea><br /><br />
+
+                <h3 class="heading">Ingredients</h3>
+                <div formArrayName="itemRows">
+                    <div *ngFor="let itemrow of formArr.controls; let i=index" [formGroupName]="i">
+                        Ingredient {{ i + 1 }} &nbsp;&nbsp;
+                        <input type="text" placeholder="Ingredient Name" formControlName="ingName" class="ingredient">
+                        <input type="text" placeholder="Quantity" formControlName="quantity" class="quantity">
+                        <button class="button" (click)="addNewRow()">+</button>
+                        <button class="button1" (click)="deleteRow(i)"
+                            *ngIf="formArr.controls.length > 1">-</button><br /><br />
+                    </div>
+                </div><br />
+                <h3 class="heading">Procedure</h3>
+                <div formArrayName="steps">
+                    <div *ngFor="let steps of newArr.controls; let i=index" [formGroupName]="i">
+                        &nbsp;&nbsp;Step {{ i + 1 }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" formControlName="step" class="procedure">
+                        <button class="button" (click)="addNewRow2()">+</button>
+                        <button class="button1" (click)="deleteRow2(i)"
+                            *ngIf="newArr.controls.length > 1">-</button><br /><br />
+                    </div>
+                </div><br />
+                <h3 class="heading">Tips</h3>
+                <textarea rows="3" cols="30" formControlName="tips" class="tips"
+                    placeholder="Add your tips"></textarea><br /><br />
+
+                <div>
+                    <img [src]="imageUrl" style="width:280px;height:250px;margin-left: 10px;margin-right: 10px;"
+                        alt="Your Uploaded Recipe Image">
+                    <input type="file" style="margin-top:180px; float:right;" #Image accept="image/*"
+                        (change)="handleFileInput($event.target.files)">
+                </div><br><br>
+                <button class="add" (click)="onSubmit()"><b>Add</b></button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+<!--DOCTYPE html>
+<html>
+
+<head>
+    <title>Add recipe</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+        integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="addrecipe.component.css">
+</head>
+
+<body>
+    <div>
+        <app-userheader></app-userheader>
+    </div>
+    <br /><br />
+    <div class="mainsec">
+        <div class="centered">Add Recipe &nbsp;<i class="fa fa-cutlery" style="color: tomato;" aria-hidden="true"></i></div>
+        <div class="box">
+            <form [formGroup]="demoForm" >
+                <br/>
+                <h3 class="heading">Title</h3>
+                <input type="text" formControlName="title" class="title"><br /><br />
+                <h3>Category</h3>
+                <select formControlName="category" class="type">
+                    <option value="Starter">Starter</option>
+                    <option value="Main Course">Main Course</option>
+                    <option value="Dessert">Dessert</option>
+                    <option value="Beverage">Beverge</option>
+                    <option value="Other">Other</option>
+                </select><br><br>
+                <h3>Cooking Time </h3>
+                <input type="text" formControlName="cookTime" class="type"><br /><br />
+                <h3>Persons</h3>
+                <input type="text" formControlName="persons" class="type"><br /><br />
+                <h3>Description</h3>
+                <textarea rows="4" cols="50" formControlName="description"
+                    placeholder="Add Description about your Recipe"></textarea><br /><br />
+
+                <h3>Ingredients</h3>
+                <div formArrayName="itemRows">
+                    <div *ngFor="let itemrow of formArr.controls; let i=index" [formGroupName]="i">
+                        Ingredient {{ i + 1 }} &nbsp;&nbsp;
+                        <input type="text" placeholder="Ingredient Name" formControlName="ingName" class="ingredient">
+                        <input type="text" placeholder="Quantity" formControlName="quantity" class="quantity">
+                        <button class="button" (click)="addNewRow()">+</button>
+                        <button class="button1" (click)="deleteRow(i)" *ngIf="formArr.controls.length > 1">-</button><br/><br/>
+                    </div>
+                </div><br />
+                <h3>Procedure</h3>
+                <div formArrayName="steps">
+                    <div *ngFor="let steps of newArr.controls; let i=index" [formGroupName]="i">
+                        &nbsp;&nbsp;Step {{ i + 1 }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" formControlName="step" class="procedure">
+                        <button class="button" (click)="addNewRow2()">+</button>
+                        <button class="button1" (click)="deleteRow2(i)" *ngIf="newArr.controls.length > 1">-</button><br/><br/>
+                    </div>
+                </div><br />
+                <h3>Tips</h3>
+                <textarea rows="3" cols="30" formControlName="tips" class="tips" placeholder="Add your tips"></textarea><br /><br />
+                <div>
+                    <img [src]="imageUrl" style="width:280px;height:250px;margin-left: 10px;margin-right: 10px;" alt="Your Uploaded Recipe Image">
+                    <input type="file" style="margin-top:180px; float:right;" #Image accept="image/*" (change)="handleFileInput($event.target.files)">
+                </div>
+                
+                <button class="Submit" type="submit" (click)="onSubmit()">Add</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html-->
+
+
+
+
+
+
+
+
+
+
+
+<!--head>
+    <link rel="stylesheet" type="text/css" href="addrecipe.component.css">
+</head>
+
+<body>
+    <div class="dropdown">
+        <button class="dropbtn">Options</button>
+        <div class="dropdown-content">
+            <a (click)="allRec()">All Recipes</a>
+        </div>
+    </div>
+    <br /><br />
+    <div class="container text-center">
+
+        <form [formGroup]="demoForm" (ngSubmit)="onSubmit()">
+            Title<input type="text" formControlName="title"><br /><br />
+            Category <select formControlName="category">
+                <option value="Starter">Starter</option>
+                <option value="Main Course">Main Course</option>
+                <option value="Dessert">Dessert</option>
+                <option value="Beverge">Beverge</option>
+                <option value="Other">Other</option>
+            </select>
+            <br /><br />
+            Cook Time(in min) <input type="text" formControlName="cookTime"><br /><br />
+            No. of Persons <input type="text" formControlName="persons"><br /><br />
+            Description <textarea rows="2" cols="30" formControlName="description"></textarea><br /><br />
+            Ingredients
+            <div formArrayName="itemRows">
+                <div *ngFor="let itemrow of formArr.controls; let i=index" [formGroupName]="i">
+                    Ingredient {{ i + 1 }}
+                    <input type="text" placeholder="Ingredient Name" formControlName="ingName" class="ingredient">
+                    <input type="text" placeholder="Quantity" formControlName="quantity" class="quantity">
+                    <button class="button" (click)="addNewRow()">+</button>
+                    <button class="button1" (click)="deleteRow(i)" *ngIf="formArr.controls.length > 1">-</button>
+                </div>
+            </div><br />
+            Procedure
+            <div formArrayName="steps">
+                <div *ngFor="let steps of newArr.controls; let i=index" [formGroupName]="i">
+                    Step {{ i + 1 }}
+                    <input type="text" formControlName="step" class="procedure">
+                    <button class="button" (click)="addNewRow2()">+</button>
+                    <button class="button1" (click)="deleteRow2(i)" *ngIf="newArr.controls.length > 1">-</button>
+                </div>
+            </div><br />
+            Tips <textarea rows="2" cols="30" formControlName="tips"></textarea><br /><br />
+            <button class="btn btn-primary" type="submit">Add</button>
+        </form>
+    </div>
+</body-->

@@ -1,0 +1,115 @@
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+        integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+</head>
+<app-userheader></app-userheader>
+<div class="modal fade" id="cookModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Update Details:</h4>
+                <button class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form #cookForm="ngForm" class="form-group" (ngSubmit)="update()">
+                    Approximate number of persons attending event:<br />
+                    <input type="number" name="persons" [(ngModel)]='rqstRec.persons'><br />
+                    Date of event:<br />
+                    <input type="date" min="{{todate | date:'yyyy-MM-dd'}}" class="form-control" id="input-12"
+                        name="date" [(ngModel)]='rqstRec.date'><br />
+                    Time at which {{rqstRec.user1.loginId}} should be at your place for cooking:<br />
+                    <input type="time" name="time" [(ngModel)]='rqstRec.time'><br />
+                    Enter exact address of the event:<br />
+                    <textarea rows="3" cols="30" name="address" [(ngModel)]='rqstRec.address'></textarea><br />
+                    Message to {{rqstRec.user1.loginId}} (optional):<br />
+                    <textarea rows="3" cols="30" name="message" [(ngModel)]='rqstRec.message'></textarea><br />
+                    <button class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" (click)="cancel()">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+Requests you got:<br />
+<div class="row text-center" *ngIf="rqsts">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card"
+            style="width: 400px;height:300px;background-color:#f8a0f8;margin-left: 50px;border: 5px solid  rgba(174, 56, 139,0.6);"
+            *ngFor="let rqst of rqsts;">
+            <table>
+                <tr>
+                    <td>
+                        <img class="card-img" style="height:100px;width: 100px;"
+                            src="http://localhost:8085/RESTAPI2018/image/{{rqst.user1.loginId|sepPipe:2}}">
+                    </td>
+                    <td>
+                        <div class="card-body" style="float:left">
+                            <h4 class="card-title"><b>Recipe:{{rqst.user1.loginId|sepPipe:1}}</b></h4>
+                            <h5>From:{{rqst.user.loginId}}</h5>
+                            <h5>Date:{{rqst.date|date:'dd-MMM-yyyy'}},{{rqst.time}}</h5>
+                            <h5>Address{{rqst.address}}</h5>
+                            <h5 *ngIf="rqst.message">Message:{{rqst.message}}</h5>
+                            <br /><br />
+                            <table style="border: none;width:200px" *ngIf="rqst.date>todate && !(rqst.status==='a') && !(rqst.status==='r')">
+                                <tr>
+                                    <td><button (click)="accept(rqst)">Accept</button></td>
+                                    <td><button (click)="reject(rqst)">Reject</button>
+                                    </td>
+                                </tr>
+                            </table>
+                            <p *ngIf="rqst.date<todate">Event Finished!!</p>
+                            <p  *ngIf="rqst.status==='r'">You Rejected This Request!!</p>
+                            <p *ngIf="rqst.status==='a'">You Accepted This Request!!</p>
+                            <br />
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div><br /><br />
+    </div>
+</div>
+<div *ngIf="rqsts.length===0">You don't have any Requests</div>
+
+
+Requests you made:<br />
+<div class="row text-center" *ngIf="asks">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card"
+            style="width: 400px;background-color:#f8a0f8;margin-left: 50px;height: 300px;border: 5px solid  rgba(174, 56, 139,0.6);"
+            *ngFor="let ask of asks;">
+            <table>
+                <tr>
+                    <td>
+                        <img class="card-img" style="height:100px;width: 100px;"
+                            src="http://localhost:8085/RESTAPI2018/image/{{ask.user.loginId|sepPipe:2}}">
+                    </td>
+                    <td>
+                        <div class="card-body" style="float:left">
+                            <h4 class="card-title"><b>Recipe:{{ask.user.loginId|sepPipe:1}}</b></h4>
+                            <h5>To:{{ask.user1.loginId}}</h5>
+                            <h5>Date:{{ask.date|date:'dd-MMM-yyyy'}},{{ask.time}}</h5>
+                            <h5>Address:{{ask.address}}</h5>
+                            <h5 *ngIf="ask.message">Message:{{ask.message}}</h5>
+                            <table style="border: none;width:200px" *ngIf="ask.status==='p'">
+                                <tr>
+                                    <td><button (click)="edit(ask)">Edit</button></td>
+
+                                    <td><button (click)="delete(ask)">Delete</button>
+                                    </td>
+                                </tr>
+                            </table>
+                            <p *ngIf="ask.status==='a'">Request is accepted</p>
+                            <p *ngIf="ask.date<todate">Event Finished!!</p>
+                            <p *ngIf="ask.status==='r'">Request is Rejected</p>
+                            <br />
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div><br /><br />
+    </div>
+</div>
+<div *ngIf="asks.length===0">You didn't make any Requests</div>

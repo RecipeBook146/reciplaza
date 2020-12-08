@@ -1,0 +1,43 @@
+<app-userheader></app-userheader>
+<div style="background-color: #ffccff;margin-top: -25px;">
+    <br/><br/>
+    <div class="container">
+
+        <table class="table table-bordered table-striped table-hover table-sm text-center">
+            <thead>
+                <tr class="text-white" style="background-color: #AE388B;">
+                    <th>Image</th>
+                    <th>Product Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor='let product of products; let i=index'>
+                    <td><img class="card-img" style="height:150px;width: 150px;"
+                            src="http://localhost:8085/RESTAPI2018/image/{{product.imageName}}"></td>
+                    <td>{{product.manufacturer}} {{product.produtName}}</td>
+                    <td>{{product.quantity}}</td>
+                    <td>{{product.price | pricepipe: count[i] | currency:'INR' }}</td>
+                </tr>
+                <tr>
+                    <td style="border: none;"></td>
+                    <td style="border: none;"></td>
+                    <td style="border: none;"></td>
+                    <td>Total:{{totalAmt | demopipe:products:count | currency:'INR'}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <br /><br />
+        <h5>Address</h5>
+        <h6>Address:{{address.hno}},{{address.street}},{{address.city}},{{address.state}}</h6>
+        <h6>Pincode:{{address.pincode}}</h6>
+        <h6>Landmark:{{address.landmark}}</h6>
+        <br />
+        <input type="radio" name="COD" value="COD" checked>COD
+        <br /><br />
+        <button class="btn" style="margin-left:45%;background-color: #AE388B;" (click)="addOrder()">Confirm
+            Order</button>
+        <br /><br />
+    </div>
+</div>

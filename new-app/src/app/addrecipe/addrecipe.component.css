@@ -1,0 +1,133 @@
+.title{
+    width: 580px;
+    border-radius: 5px;
+    border: none;
+    padding: 8px;
+    border-bottom: 1px solid #fff;
+    }
+.centered{
+  position: absolute;
+  top: 23%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 40px;
+  color:#FF2768;
+  margin-left: -20px;
+  font-weight: 600;
+  font-family: Cambria;
+}
+.heading{
+    
+    color: black;
+    font-family: Cambria;
+    }
+.mainsec{
+        margin:0;
+        padding:0;
+        /*background-image:url('https://media3.s-nbcnews.com/i/newscms/2019_33/2968126/190812-vegetarian-cooking-stock-cs-1019a_d1776512a06c93bf9ae2adda9b9c2586.jpg');*/
+        background-color: #ffccff;
+        background-repeat: no-repeat;
+        background-position:center;
+        font-family:sans-serif;
+        height: 3000px;
+        width:1530px;
+        left: 30px;
+        background-size: cover;
+        bottom: 20px;
+        margin-top:-40px;
+    
+    }
+/*#grad3 {
+  
+  background-color: red;
+  background-image: linear-gradient(180deg, green, blue); 
+}*/
+
+.box{
+    /*background:#48d1cc;*/
+    padding-left: 20px;
+    width: 700px;
+    padding-top: 30px;
+    top: -150px;
+    position: absolute;
+   /* background: rgba(50, 205, 50,0.9);*/
+    margin-top: 350px;
+    left: 360px;
+    height: 2500px;
+    border-radius: 20px;
+    background-color:  rgba(255, 39, 104,0.7);
+        
+}
+.box textarea{
+    width: 580px;
+    border: none;
+    border-radius: 5px;
+}
+.type{
+    width:580px;
+    border: none;
+    border-radius: 5px;
+    padding: 8px;
+    color: black;
+}
+.quantity{
+    margin-left: 20px;
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    width: 200px;}
+.ingredient{
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    width: 200px;
+    color: black;
+}
+.button{
+    margin-left: 25px;
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    width: 30px;
+    color: white;
+    background-color: #004d00;
+    opacity:0.8;
+    
+}
+.button1{
+    margin-left: 20px;
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    width: 30px;
+    color: white;
+    background-color:#8b0000;
+    opacity: 0.8;
+}
+.procedure{
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    width: 460px;
+    color: black;
+}
+.img{
+    height: 1500px;
+    width: 1380px;
+    top: -15px;
+    position: fixed;
+}
+.tips{
+    margin-bottom: 20px;
+}
+
+.add{
+    background-color:#AE388B;
+    border: none;
+    width:300px ;
+    padding: 10px;
+    border-radius: 15px;
+    margin-left: 140px;
+    margin-top: 40px;
+    color:white;
+}

@@ -1,0 +1,110 @@
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+</head>
+
+<app-userheader></app-userheader>
+<div class="modal fade" id="chooseAddressModal">
+    <div class="modal-dialog">
+        <div class="modal-content" style="background-color:#ffccff ;">
+            <div class="modal-header">
+                <h4 class="modal-title">Address</h4>
+                <button class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" *ngFor="let a of address">
+                    <div class="card" style="border-radius: 10px;">
+                        <div class="card-body">
+                            <div style="float:left;">
+                                <h4>Address:{{a.hno}},{{a.street}},{{a.city}},{{a.state}}</h4>
+                                <h4>Pincode:{{a.pincode}}</h4>
+                                <h4>Landmark:{{a.landmark}}</h4>
+                            </div>
+                            <input type="radio" style="float: right;" value={{a.id}} name="address"
+                                [(ngModel)]="chosenId">
+                        </div>
+                    </div>
+                    <br /><br />
+                </div>
+                <br /><br />
+                <button style="border: none;" (click)="addAddress()">Manage Address</button>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" (click)="placeOrder()">Done</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="noAddressModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <p>You didn't add any address</p>
+                <button (click)="addAddress()">Add new Adddress</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="background-color: #ffccff;width: 100%;height: 100%;margin-top: -40px;">
+    <br /><br />
+
+    <div *ngIf="products.length>0">
+        <div class="row text-center">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" *ngFor="let product of products; let i=index">
+                <div class="card"
+                    style="width: 600px;background-color:#f8a0f8;margin-left: 50px;;border: 5px solid  rgba(174, 56, 139,0.6);">
+                    <table>
+                        <tr>
+                            <td>
+                                <img class="card-img" style="height:100px;width: 100px;"
+                                    src="http://localhost:8085/RESTAPI2018/image/{{product.imageName}}">
+                            </td>
+                            <td>
+                                <div class="card-body" style="float:left">
+                                    <h4 class="card-title"><b>{{product.manufacturer}} {{product.produtName}}</b></h4>
+                                    <br /><br />
+                                    <table style="border: none;width:200px">
+                                        <tr>
+                                            <td><button (click)="iupdate(product.productId,count[i])"
+                                                    style="height:30px;width: 30px;border-radius:5px; background-color: #536a2f;color: white;border: none;"><i
+                                                        class="fa fa-plus"></i></button></td>
+                                            <h5>{{count[i]}}</h5>
+                                            <td><button (click)="dupdate(product.productId,count[i])"
+                                                    style="height:30px;width: 30px; border-radius:5px; background-color: #f1b10e;color: white;border: none;"><i
+                                                        class="fa fa-minus"></i></button></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td><button (click)="delete(product,count[i])"
+                                                    style="height:30px;width: 30px;border-radius:5px; background-color: #ED2B33FF;color: white;border: none;"><i
+                                                        style="font-size: 18px;" class="fa fa-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <br /><br />
+                                    <h4>Price : {{product.price | pricepipe: count[i] | currency:'INR' }}</h4>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div><br />
+            </div>
+        </div>
+        <br />
+        <div class="container">
+            <h4>Cart Subtotal : <b>{{totalAmt | demopipe:products:count | currency:'INR'}}</b></h4><br />
+            <button class="btn" style="background-color: #AE388B;color: white;" (click)="showEditPopup()">Place Order
+                >></button>
+        </div>
+        <br /><br /><br /><br /><br /><br /><br /><br /><br />
+    </div>
+</div>
+<div style="background-color: #ffccff;width: 100%;height: 540px;" *ngIf="products.length<=0">
+    <div class="container">
+        <i class="fa fa-frown-o" style="font-size: 150px;margin-left: 45%;margin-top: 100px;"
+            aria-hidden="true"></i><br />
+        <h3 class="text-center">No Items in the Cart!</h3><br />
+    </div>
+</div>

@@ -1,0 +1,61 @@
+<app-userheader></app-userheader>
+<div style="background-color: #ffccff;margin-top: -23px;">
+    <br/><br/>
+    <div class="md-form mt-0">
+        <button style="float: right;border: none;;height: 50px;margin-right: 5px;width: 50px;"
+            (click)="searchProds()"><i class="fa fa-search"></i></button>
+        <input class="form-control" style="width: 300px;float: right;height: 50px;" type="text" placeholder="Search"
+            aria-label="Search" [(ngModel)]="searchProd">
+        <br /><br />
+    </div>
+</div>
+<div *ngIf="ing" style="background-color: #ffccff;">
+    <button class="btn" style="background-color: #ff4d4d;margin-left: 5px;" (click)="navigate()" *ngIf="stat">
+        << Back to Recipe </button>
+            <br /><br />
+            <div class="container" *ngIf="products.length>0">
+                <div class="row text-center">
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-6" *ngFor="let product of products"
+                        style="width:600px;height:700px;">
+                        <div class="card">
+                            <img class="card-img" style="height:250px;width: 250px;"
+                                src="http://localhost:8085/RESTAPI2018/image/{{product.imageName}}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{product.manufacturer}} {{product.produtName}}</h5>
+                                <p class="card-text">{{product.description}}</p>
+                                <h5>{{product.price | currency:'INR'}}</h5>
+                                <button class="btn" (click)="addToCart(product)" style="background-color: #ff4d4d;">Add
+                                    To Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container" *ngIf="products.length==0">
+                <p>No Products found!!</p>
+            </div>
+</div>
+<div *ngIf="!ing" style="background-color: #ffccff;">
+    <div class="container">
+        <div class="row text-center">
+            <div *ngFor="let product of products">
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-6">
+                    <div class="card" style="width:260px;height: 480px;">
+                        <img class="card-img" style="height:250px;width: 250px;"
+                            src="http://localhost:8085/RESTAPI2018/image/{{product.imageName}}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{product.manufacturer}} {{product.produtName}}</h5>
+                            <p class="card-text">{{product.description}}</p>
+                            <h5>{{product.price | currency:'INR'}}</h5>
+                            <button class="btn" (click)="addToCart(product)" style="background-color: #ff4d4d;">Add To
+                                Cart</button>
+                        </div>
+                    </div>
+                    <br />
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

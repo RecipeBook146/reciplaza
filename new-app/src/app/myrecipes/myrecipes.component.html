@@ -1,0 +1,61 @@
+<div>
+    <app-userheader></app-userheader>
+</div>
+<div style="background-color: #ffccff;margin-top: -30px;">
+    <br/><br/>
+    <div class="container" *ngIf="recipes.length>0">
+        <div class="row text-center">
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-6" *ngFor="let recipe of recipes">
+                <div class="card" style="width:260px;">
+                    <img class="card-img" style="width:250px;height: 225px;"
+                        src="http://localhost:8085/RESTAPI2018/image/{{recipe.imageName}}">
+                    <div class="card-body">
+                        <h3 class="card-title">{{recipe.title}}</h3>
+                        <h5>Category:{{recipe.category}}</h5>
+                        <p class="card-text">
+                            {{ (recipe.description.length>25)? (recipe.description | slice:0:25)+' ... ':(recipe.description)}}
+                        </p>
+                        <button class="btn" style="background-color: #AE388B;" (click)="fullRecipe(recipe)">View full
+                            Recipe>></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br/><br/><br/><br/>
+</div>
+
+<div style="background-color: #ffccff;margin-top: -30px;">
+    <div *ngIf="recipes.length===0" style="height: 575px;">
+        <br/><br/>
+        <i class="fa fa-frown-o" style="font-size: 150px;margin-left: 45%;color: #AE388B;" aria-hidden="true"></i><br />
+        <h3 class="text-center" style="color: #AE388B;">No Recipes Uploaded!</h3><br />
+        <button class="btn text-center" style="margin-left: 45%;background-color: #AE388B;color: white;" (click)="uploadRecipe()">Upload
+            Recipe&nbsp;&nbsp;<i style="color: white;" class="fa fa-cutlery" aria-hidden="true"></i></button>
+    </div>
+</div>
+<!--div *ngIf="recipe" class="container">
+    <img style="height:250px;float: left;margin-right: 100px;" src="assets\Images\recipe.jpg">
+    <br />
+    <h1>{{recipe.title}}</h1>
+    <br />
+    <h5>Category:{{recipe.category}}</h5>
+    <h3>{{recipe.description}}</h3>
+    <h5>Cook Time:{{recipe.cookTime}}</h5>
+    <h5>Persons:{{recipe.persons}}</h5>
+    <br />
+    <h4>Ingredients:</h4>
+    <div *ngFor="let ing of ings">
+        <ul>
+            <li>{{ing}}</li>
+        </ul>
+    </div>
+    <h4>Procedure:</h4>
+    <div *ngFor="let step of steps">
+        <ul>
+            <li>{{step}}</li>
+        </ul>
+    </div>
+    <h5>Tips:</h5>
+    <p>{{recipe.tips}}</p>
+</div-->

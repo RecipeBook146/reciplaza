@@ -1,0 +1,68 @@
+<body>
+    <div id="google_translate_element"></div>
+    <div *ngIf="!id">
+        <app-header></app-header>
+    </div>
+    <div *ngIf="id">
+        <app-userheader></app-userheader>
+    </div>
+    <div class="mainsec">
+
+        <div *ngIf="recipe" class="container">
+            <img style="height:250px; width:300px; margin-top: 20px;"
+                src="http://localhost:8085/RESTAPI2018/image/{{recipe.imageName}}">
+            <br />
+            <h2 style="color: #8b008b; font-family: Cambria;"><b>{{recipe.title}}</b></h2>
+            <br />
+            <h5 class="heading"><b>Description :</b> </h5>
+            <p>{{recipe.description}}</p>
+            <h5 class="heading"><b>Category : </b></h5>
+            <p style="margin-right: -500px;">{{recipe.category}}</p>
+
+            <h5 class="heading"><b>Cook Time : </b></h5>
+            <p>{{recipe.cookTime}}</p>
+            <h5 class="heading"><b>No. of Persons:</b></h5>
+            <p>{{recipe.persons}}</p>
+            <!--div *ngIf="recipe.stat==='yes'">
+                Ask {{recipe.loginId}} to cook at your place?<button>Click Here!</button>
+            </div-->
+            <div *ngIf=" recipe.rating===0">No Enough Ratings Yet!</div>
+            <div *ngFor="let num of nums" class="text-center">
+                <div *ngIf="recipe.rating>num"><i style="color: red;float: left;" class="fa fa-star"></i></div>
+                <div *ngIf="recipe.rating<=num && recipe.rating>0"><i style="color: red;float: left;"
+                        class="fa fa-star-o">&nbsp;&nbsp;{{count}}</i>
+                </div>
+            </div>
+            <br />
+            <h5 class="heading"><b>Ingredients : </b></h5>
+            <div *ngFor="let ing of ings">
+                <ul class="a" style="list-style-type:square;">
+                    <li>{{ing}}&nbsp;&nbsp;<a (click)="method(ing)" *ngIf="id"><i class="fa fa-search"
+                                aria-hidden="true"></i></a>
+                    </li>
+                </ul>
+            </div>
+            <h5 class="heading"><b>Procedure : </b></h5>
+            <div *ngFor="let step of steps">
+                <ul class="a" style="list-style-type:square;">
+                    <li>{{step}}</li>
+                </ul>
+            </div>
+            <h5 class="heading"><b>Tips : </b></h5>
+            <p>{{recipe.tips}}</p>
+            <div *ngIf="id && !stat">
+                <div *ngIf="!msg"> <button class="btn" (click)="change()" style="float: left;margin-right: 15px;">
+                        <h5 style="float: left; color: #8b008b; 
+            font-family: Cambria;"><b>Rate the Recipe ? </b></h5>
+                    </button></div>&nbsp;&nbsp;
+                <div *ngIf="clicked">
+                    <a *ngFor="let item of starList; let i=index " (click)="setStar(i)">
+                        <i style="color: red;float: left;" class="fa"
+                            [ngClass]="{'fa-star-o':item,'fa-star':!item}"></i>
+                    </a>
+                </div>
+            </div>
+            <br /><br />
+        </div>
+    </div>
+</body>

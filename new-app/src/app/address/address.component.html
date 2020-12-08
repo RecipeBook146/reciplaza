@@ -1,0 +1,132 @@
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+        integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+</head>
+<app-userheader></app-userheader>
+<div style="background-color:#ffccff ;height:800px;margin-top: -40px;">
+    <div class="container">
+        <div class="modal fade" id="editAddressModal">
+            <div class="modal-dialog">
+                <div class="modal-content" style="background-color:#ffccff; color:black;">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Edit Address</h4>
+                        <button class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="input-group">
+                            HNO: <input type="text" name="hno" [(ngModel)]="demo.hno" class="form-control"><br />
+                            Street: <input type="text" name="street" [(ngModel)]="demo.street"
+                                class="form-control"><br />
+                            City: <input type="text" name="city" [(ngModel)]="demo.city" class="form-control"><br />
+                            State: <input type="text" name="state" [(ngModel)]="demo.state" class="form-control"><br />
+                            Landmark: <input type="text" name="landmark" [(ngModel)]="demo.landmark"
+                                class="form-control"><br />
+                            Pincode: <input type="text" name="pincode" [(ngModel)]="demo.pincode"
+                                class="form-control"><br />
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" (click)="updateAddress()">Update</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="addressModal">
+            <div class="modal-dialog">
+                <div class="modal-content" style="background-color:#ffccff; color:black;">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add Address</h4>
+                        <button class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body" style="border-bottom: 1px solid black;">
+                        <!--div class="form-group">
+                        <p>Confirm Password</p>
+                        <input type="password" style="color: white;" placeholder="Confirm Password"
+                            formControlName="confirmPassword" class="form-control"
+                            [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
+                        <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+                            <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
+                            <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
+                        </div>
+                    </div-->
+                        <form class="input-group" [formGroup]="AddressForm">
+                            <div class="form-group">
+                                <p>Enter HNO:</p>
+                                <input type="text" name="hno" formControlName="hno" [(ngModel)]="address.hno"
+                                    class="form-control" [ngClass]="{ 'is-invalid': submitted && f.hno.errors }">
+                                <div *ngIf="submitted && f.hno.errors" class="invalid-feedback">
+                                    <div *ngIf="f.confirmPassword.errors.required">This is required</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <p>Enter Street:</p>
+                                <input type="text" name="street" formControlName="street" [(ngModel)]="address.street"
+                                    class="form-control" [ngClass]="{ 'is-invalid': submitted && f.street.errors }">
+                                <div *ngIf="submitted && f.street.errors" class="invalid-feedback">
+                                    <div *ngIf="f.street.errors.required">This is required</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <p>Enter City:</p>
+                                <input type="text" name="city" formControlName="city" [(ngModel)]="address.city"
+                                    class="form-control" [ngClass]="{ 'is-invalid': submitted && f.city.errors }">
+                                <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+                                    <div *ngIf="f.city.errors.required">This is required</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <p>Enter State:</p>
+                                <input type="text" name="state" formControlName="state" [(ngModel)]="address.state"
+                                    class="form-control" [ngClass]="{ 'is-invalid': submitted && f.state.errors }">
+                                <div *ngIf="submitted && f.state.errors" class="invalid-feedback">
+                                    <div *ngIf="f.state.errors.required">This is required</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <p>Enter Landmark:</p>
+                                <input type="text" name="landmark" formControlName="landmark"
+                                    [(ngModel)]="address.landmark" class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.landmark.errors }">
+                                <div *ngIf="submitted && f.landmark.errors" class="invalid-feedback">
+                                    <div *ngIf="f.landmark.errors.required">This is required</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <p>Enter Pincode:</p>
+                                <input type="text" name="pincode" formControlName="pincode"
+                                    [(ngModel)]="address.pincode" class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.pincode.errors }">
+                                <div *ngIf="submitted && f.pincode.errors" class="invalid-feedback">
+                                    <div *ngIf="f.pincode.errors.required">This is required</div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn" style="background-color: #009999; color:white;border:none;width:50px;"
+                            (click)="addAddress()">Add</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-primary" (click)="showEditPopup()"
+            style="background-color:#AE388B;border:none;margin-left: 20px;margin-top: 50px;">Add New Address</button>
+        <div *ngIf="allAddress">
+           <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" *ngFor="let a of allAddress">
+                <br />
+                <div class="card" style="width: 300px;border-radius: 10px;">
+                    <div class="card-body">
+                        <h4>Address:{{a.hno}},{{a.street}},{{a.city}},{{a.state}}</h4>
+                        <h4>Landmark:{{a.landmark}},{{a.pincode}}</h4>
+                        <!--button (click)="deleteAddress(a)" style="background-color: #ED2B33FF
+                        ;border:none;color:white ;border-radius:5px;"><i class="fa fa-trash-o"></i></button-->
+                        <button style="margin-left: 10px;background-color: #536a2f;color:white;border:none;margin-left: 10px;border-radius:5px;" (click)="showUpdatePopup(a)"><i class="fa fa-pencil-square-o"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <br/><br/>
+        <button class="btn btn-primary" (click)="back()">
+            << Back</button>
+    </div>

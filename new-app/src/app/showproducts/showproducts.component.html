@@ -1,0 +1,58 @@
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+</head>
+
+<app-productsheader></app-productsheader>
+<div class="container">
+    <div class="modal fade" id="editProductModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit Product Details</h4>
+                    <button class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form class="input-group">
+                        ProductName
+                        <input type="text" class="name" name="productName" [(ngModel)]='editProduct.produtName'
+                            disabled><br><br>
+                        Description<textarea cols="50" rows="3" name="description"
+                            [(ngModel)]='editProduct.description'></textarea><br><br>
+                        Quantity <input type="number" name="quantity" [(ngModel)]='editProduct.quantity'><br><br>
+                        Price<input type="number" name="price" [(ngModel)]='editProduct.price'><br><br>
+                        Manufacturer<input type="text" name="manufacturer" [(ngModel)]='editProduct.manufacturer'
+                            disabled><br><br>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" (click)="updateProduct()">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <table class="table table-bordered table-striped table-hover table-sm text-center">
+        <thead>
+            <tr class="bg-danger text-white">
+                <th>SNo</th>
+                <th>Image</th>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor='let product of products; let i=index'>
+                <td>{{i+1}}</td>
+                <td><img class="card-img" style="height:150px;width: 150px;"
+                        src="http://localhost:8085/RESTAPI2018/image/{{product.imageName}}"></td>
+                <td>{{product.manufacturer}} {{product.produtName}}</td>
+                <td>{{product.quantity}}</td>
+                <td>{{product.price | currency:'INR' }}</td>
+                <td><button (click)="showUpdatePopup(product)"><i class="fa fa-pencil-square-o"></i></button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
